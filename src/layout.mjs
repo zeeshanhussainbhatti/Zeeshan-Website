@@ -15,6 +15,18 @@ export const ph = (label, ratio = "4/5", extra = "") =>
       <i class="ri-image-add-line"></i><span>${esc(label)}</span>
     </div>`;
 
+
+// Brand mark: a "Z" whose base stroke turns into a red growth arrow (Zeeshan + growth).
+export const logoMark = (id = "lm") => `<svg class="logo__mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#b80f22"/><stop offset="1" stop-color="#ff3b4f"/></linearGradient></defs>
+  <rect class="lm-bg" x="1" y="1" width="46" height="46" rx="13"/>
+  <path class="lm-z" d="M11.5 13.5H28.5L11.5 34.5H21" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="lm-arrow" stroke="url(#${id})" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 34.5L36.5 19"/><path d="M30 19h6.5v6.5"/>
+  </g>
+</svg>`;
+const logoText = `<span class="logo__text"><strong>Zeeshan Hussain <span>Bhatti</span></strong><small>Digital Marketing Expert</small></span>`;
+
 export function head({ title, description, path, b, schema = [] }) {
   const canonical = `${site.url}/${path}`.replace(/index\.html$/, "");
   const ld = schema.map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n");
@@ -44,7 +56,7 @@ export function head({ title, description, path, b, schema = [] }) {
 ${ld}
 </head>
 <body>
-<div class="preloader" aria-hidden="true"><div class="preloader__logo">Z<span>H</span>B</div><div class="preloader__bar"></div></div>
+<div class="preloader" aria-hidden="true"><div class="preloader__logo">${logoMark("lm-p")}</div><div class="preloader__bar"></div></div>
 <div class="scroll-progress" aria-hidden="true"></div>
 <div class="cursor-glow" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>`;
@@ -86,8 +98,8 @@ export function header(b, active) {
 <header class="header" id="top">
   <div class="container header__inner">
     <a class="logo" href="${b}index.html" aria-label="${site.name} — Home">
-      <span class="logo__mark">Z<b>H</b>B</span>
-      <span class="logo__text"><strong>Zeeshan Hussain Bhatti</strong><small>Digital Marketing Expert</small></span>
+      ${logoMark("lm-h")}
+      ${logoText}
     </a>
     <nav class="nav" aria-label="Main">
       <ul class="nav__list">
@@ -144,7 +156,7 @@ export function footer(b, active) {
   <div class="footer__glow" aria-hidden="true"></div>
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a class="logo" href="${b}index.html"><span class="logo__mark">Z<b>H</b>B</span><span class="logo__text"><strong>Zeeshan Hussain Bhatti</strong><small>Digital Marketing Expert</small></span></a>
+      <a class="logo" href="${b}index.html">${logoMark("lm-f")}${logoText}</a>
       <p>Karachi-based digital marketing expert with ${site.years}+ years helping businesses grow with SEO, performance marketing and premium design.</p>
       <div class="socials">
         <a href="${site.social.linkedin}" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
@@ -241,6 +253,7 @@ export const businessSchema = {
   email: site.email,
   priceRange: "$$",
   image: `${site.url}/assets/img/og.jpg`,
+  logo: `${site.url}/assets/img/logo-mark.svg`,
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.split(",")[0],

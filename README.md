@@ -19,6 +19,19 @@ A fast, mobile-first personal brand website in a black & red tech theme, built w
 
 **Mobile:** a sticky, app-style bottom navigation (Home · Services · WhatsApp · Blogs · Connect). The Services button opens a bottom sheet that lists every service.
 
+## Brand logo
+
+The mark is a **"Z" whose bottom stroke turns into a red growth arrow** (Z for Zeeshan, and the arrow for growth and results).
+
+| File | Use |
+|---|---|
+| `assets/img/logo-mark.svg` | Icon only: social profile picture, app icon, watermark |
+| `assets/img/logo.svg` | Full logo for dark backgrounds |
+| `assets/img/logo-light-bg.svg` | Full logo for white or light backgrounds (letterhead, documents) |
+| `assets/img/favicon.svg` | Browser tab icon |
+
+On the website the logo is inline SVG (`logoMark()` in `src/layout.mjs`). It draws itself in on the preloader, and the arrow moves up on hover.
+
 ## How to edit
 
 Shared content lives in **`src/data.mjs`**: phone, email, address, social links, services, blog posts, portfolio, Karachi areas and FAQs. After you edit it, rebuild every page:

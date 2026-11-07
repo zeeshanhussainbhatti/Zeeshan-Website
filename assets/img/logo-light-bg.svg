@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 72" fill="none">
+  <defs><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#b80f22"/><stop offset="1" stop-color="#ff3b4f"/></linearGradient></defs>
+  <g transform="translate(0 0) scale(1.5)">
+    <rect x="1" y="1" width="46" height="46" rx="13" fill="#111114" stroke="#2a2a30"/>
+    <path d="M11.5 13.5H28.5L11.5 34.5H21" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g stroke="url(#g)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 34.5L36.5 19"/><path d="M30 19h6.5v6.5"/></g>
+  </g>
+  <text x="88" y="36" font-family="'Space Grotesk','Inter',Arial,Helvetica,sans-serif" font-size="27" font-weight="700" fill="#0a0a0c" letter-spacing="-0.5">Zeeshan Hussain <tspan fill="#ff3b4f">Bhatti</tspan></text>
+  <text x="89" y="60" font-family="'Inter',Arial,Helvetica,sans-serif" font-size="12.5" font-weight="600" fill="#55555f" letter-spacing="3">DIGITAL MARKETING EXPERT</text>
+</svg>
