@@ -240,7 +240,7 @@ main { position: relative; z-index: 1; }
 .float-card--a { left: -10px; top: 18%; animation-delay: -2s; }
 .float-card--b { right: -10px; top: 44%; animation-delay: -4s; }
 .float-card--c { left: 6%; bottom: 4%; }
-.slide--3 .float-card--b { top: 60%; } /* keep the card off the face in photo 3 */
+.slide--1 .float-card--b { top: 60%; } /* keep the card off the face in photo 1 */
 .hero__controls { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; position: relative; z-index: 2; }
 .hero__dots { display: flex; gap: 10px; }
 .dot { width: 46px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.15); overflow: hidden; padding: 0; }
