@@ -103,6 +103,7 @@ const slides = [
     h: `Ads That Pay For Themselves — <span class="text-red">Measured in Sales</span>`,
     p: "Google, Meta, TikTok and LinkedIn campaigns built around ROAS and cost per lead — with transparent reporting every week.",
     photo: "Your Photo — Hero Slide 3",
+    img: "assets/img/zeeshan-hero-3.webp",
   },
 ];
 
@@ -122,7 +123,7 @@ page({
     ${slides
       .map(
         (s, i) => `
-    <div class="slide${i === 0 ? " is-active" : ""}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${slides.length}">
+    <div class="slide slide--${i + 1}${i === 0 ? " is-active" : ""}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${slides.length}">
       <div class="slide__content">
         <span class="eyebrow"><span class="pulse-dot"></span>${s.eyebrow}</span>
         ${i === 0 ? `<h1>${s.h}</h1>` : `<h2 class="h1">${s.h}</h2>`}
