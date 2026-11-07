@@ -96,6 +96,7 @@ const slides = [
     h: `Rank #1 on Google Maps in <span class="text-red">DHA, Clifton</span> &amp; All of Karachi`,
     p: "Get found by customers near you. Google Business Profile optimization, local citations and review strategies that make your phone ring.",
     photo: "Your Photo — Hero Slide 2",
+    img: "assets/img/zeeshan-hero-2.webp",
   },
   {
     eyebrow: "Performance Marketing · ROI First",
@@ -140,7 +141,9 @@ page({
         <div class="orbit orbit--1" aria-hidden="true"></div>
         <div class="orbit orbit--2" aria-hidden="true"></div>
         <div class="photo-frame">
-          ${ph(s.photo, "4/5", "ph--hero")}
+          ${s.img
+            ? `<div class="ph ph--hero ph--filled" style="aspect-ratio:4/5"><img src="${b}${s.img}" alt="Zeeshan Hussain Bhatti — Digital Marketing Expert in Karachi" width="960" height="1200" decoding="async"></div>`
+            : ph(s.photo, "4/5", "ph--hero")}
           <div class="photo-frame__corner photo-frame__corner--tl"></div><div class="photo-frame__corner photo-frame__corner--br"></div>
         </div>
         <div class="float-card float-card--a"><i class="ri-line-chart-line"></i><div><strong>+320%</strong><small>Organic Traffic</small></div></div>
