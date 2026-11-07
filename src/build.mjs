@@ -142,7 +142,7 @@ page({
         <div class="orbit orbit--2" aria-hidden="true"></div>
         <div class="photo-frame">
           ${s.img
-            ? `<div class="ph ph--hero ph--filled" style="aspect-ratio:4/5"><img src="${b}${s.img}" alt="Zeeshan Hussain Bhatti — Digital Marketing Expert in Karachi" width="960" height="1200" decoding="async"></div>`
+            ? `<div class="ph ph--hero ph--filled" style="aspect-ratio:4/5"><img src="${b}${s.img}" alt="Zeeshan Hussain Bhatti — Digital Marketing Expert in Karachi" width="864" height="1080" decoding="async"></div>`
             : ph(s.photo, "4/5", "ph--hero")}
           <div class="photo-frame__corner photo-frame__corner--tl"></div><div class="photo-frame__corner photo-frame__corner--br"></div>
         </div>
