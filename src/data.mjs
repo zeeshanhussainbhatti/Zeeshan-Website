@@ -1,0 +1,350 @@
+// ==========================================================
+//  SITE DATA — edit this file to update content site-wide,
+//  then run:  node src/build.mjs
+// ==========================================================
+
+export const site = {
+  name: "Zeeshan Hussain Bhatti",
+  short: "ZHB",
+  role: "Digital Marketing Expert in Karachi",
+  url: "https://www.zeeshanhussainbhatti.com", // TODO: replace with your real domain
+  phone: "+92 300 0000000",                     // TODO: replace
+  phoneRaw: "923000000000",                      // TODO: replace (used for WhatsApp / tel links)
+  email: "hello@zeeshanhussainbhatti.com",       // TODO: replace
+  address: "Shahrah-e-Faisal, Karachi, Sindh, Pakistan", // TODO: replace with your exact office address
+  city: "Karachi",
+  hours: "Mon – Sat: 10:00 AM – 7:00 PM",
+  years: 13,
+  social: {
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
+    youtube: "#",
+    x: "#",
+  },
+};
+
+// ---------- SERVICES (mega menu + service pages) ----------
+export const categories = [
+  {
+    key: "digital-marketing",
+    name: "Digital Marketing",
+    icon: "ri-global-line",
+    blurb: "Get found on Google, build a brand on social media and turn visitors into loyal customers.",
+    services: [
+      {
+        slug: "seo-services-karachi",
+        title: "SEO Services",
+        icon: "ri-search-eye-line",
+        tagline: "Rank on page one of Google for keywords your Karachi customers search every day.",
+        desc: "Complete search engine optimization: technical audits, keyword research, on-page optimization, content and white-hat link building that grows organic traffic month after month.",
+        features: ["Technical SEO audit & fixes", "Keyword & competitor research", "On-page & schema optimization", "High-authority link building", "Content strategy & blogging", "Monthly ranking & traffic reports"],
+      },
+      {
+        slug: "local-seo-karachi",
+        title: "Local SEO Services",
+        icon: "ri-map-pin-2-line",
+        tagline: "Dominate the Google Map Pack in DHA, Clifton, Gulshan and every area of Karachi.",
+        desc: "Google Business Profile optimization, local citations, review strategy and location pages so nearby customers find, call and visit your business first.",
+        features: ["Google Business Profile optimization", "Map Pack ranking strategy", "Local citations & NAP consistency", "Review generation system", "Area-based landing pages", "Call & direction tracking"],
+      },
+      {
+        slug: "social-media-marketing",
+        title: "Social Media Marketing",
+        icon: "ri-instagram-line",
+        tagline: "Scroll-stopping content and community management on Facebook, Instagram, TikTok and LinkedIn.",
+        desc: "Strategy, content calendars, reels, community engagement and influencer collaborations that build a brand people in Pakistan actually follow.",
+        features: ["Platform strategy & calendar", "Reels & short-form video", "Community management", "Influencer collaborations", "Hashtag & trend research", "Growth & engagement reports"],
+      },
+      {
+        slug: "content-marketing",
+        title: "Content Marketing",
+        icon: "ri-quill-pen-line",
+        tagline: "Content that educates, ranks and sells — in English and Urdu.",
+        desc: "Blogs, landing page copy, video scripts and lead magnets written to rank on Google and convert readers into paying customers.",
+        features: ["Content strategy & pillars", "SEO blog writing", "Website & landing page copy", "Video & reel scripts", "Lead magnets & e-books", "Bilingual English / Urdu content"],
+      },
+      {
+        slug: "email-whatsapp-marketing",
+        title: "Email & WhatsApp Marketing",
+        icon: "ri-whatsapp-line",
+        tagline: "Automated flows and broadcasts that bring customers back again and again.",
+        desc: "Email newsletters, automation flows and WhatsApp Business broadcasts — the highest-ROI channels for retention in Pakistan.",
+        features: ["WhatsApp Business API setup", "Broadcast campaigns", "Email automation flows", "Abandoned cart recovery", "List segmentation", "Open & conversion tracking"],
+      },
+      {
+        slug: "website-design-development",
+        title: "Website Design & Development",
+        icon: "ri-code-s-slash-line",
+        tagline: "Fast, mobile-first websites built to rank and convert.",
+        desc: "WordPress, Shopify and custom websites with SEO-ready structure, lightning speed and conversion-focused layouts.",
+        features: ["Business & corporate websites", "Shopify & WooCommerce stores", "Landing pages", "Core Web Vitals optimization", "SEO-ready architecture", "Maintenance & support"],
+      },
+      {
+        slug: "online-reputation-management",
+        title: "Online Reputation Management",
+        icon: "ri-shield-star-line",
+        tagline: "Protect and grow the way your brand looks online.",
+        desc: "Monitor mentions, manage reviews and push positive content so customers trust you before they ever call.",
+        features: ["Brand mention monitoring", "Review response management", "Negative result suppression", "PR & guest features", "Crisis communication", "Sentiment reporting"],
+      },
+    ],
+  },
+  {
+    key: "graphic-design",
+    name: "Graphic Design",
+    icon: "ri-palette-line",
+    blurb: "Premium visuals that make your brand look like the leader in its category.",
+    services: [
+      {
+        slug: "logo-brand-identity",
+        title: "Logo & Brand Identity",
+        icon: "ri-pen-nib-line",
+        tagline: "A brand identity that looks premium and is remembered.",
+        desc: "Logo design, colour systems, typography and complete brand guidelines that keep every touchpoint consistent.",
+        features: ["Logo concepts & refinement", "Colour & typography system", "Brand guidelines book", "Stationery design", "Brand voice & tagline", "Rebranding strategy"],
+      },
+      {
+        slug: "social-media-creatives",
+        title: "Social Media Creatives",
+        icon: "ri-image-edit-line",
+        tagline: "Thumb-stopping posts, carousels and ad creatives.",
+        desc: "On-brand designs for posts, stories, carousels and ads — built for engagement and tested for performance.",
+        features: ["Post & carousel design", "Story & reel covers", "Ad creative variations", "Festive & campaign creatives", "Templates for your team", "A/B creative testing"],
+      },
+      {
+        slug: "print-design",
+        title: "Print & Marketing Collateral",
+        icon: "ri-printer-line",
+        tagline: "Brochures, flyers, billboards and menus that sell offline too.",
+        desc: "Print-ready designs for brochures, flyers, standees, menus, billboards and company profiles.",
+        features: ["Company profiles", "Brochures & flyers", "Billboards & hoardings", "Restaurant menus", "Standees & banners", "Print-ready files"],
+      },
+      {
+        slug: "ui-ux-design",
+        title: "UI / UX Design",
+        icon: "ri-layout-masonry-line",
+        tagline: "Interfaces that look beautiful and convert better.",
+        desc: "Wireframes, prototypes and polished UI for websites and apps, designed around how real users behave.",
+        features: ["User research & flows", "Wireframes", "Interactive prototypes (Figma)", "Website & app UI", "Design systems", "Usability testing"],
+      },
+      {
+        slug: "packaging-design",
+        title: "Packaging Design",
+        icon: "ri-gift-line",
+        tagline: "Packaging that wins the shelf and the unboxing video.",
+        desc: "Product packaging, labels and boxes designed to stand out in stores and on Instagram.",
+        features: ["Box & label design", "Product mockups", "Dieline-ready files", "Unboxing experience", "Label compliance layout", "Product range systems"],
+      },
+      {
+        slug: "motion-graphics-video",
+        title: "Motion Graphics & Video",
+        icon: "ri-movie-2-line",
+        tagline: "Animated ads, explainers and reels that hold attention.",
+        desc: "Motion graphics, explainer videos, logo animations and edited reels for ads and social media.",
+        features: ["Animated video ads", "Explainer videos", "Logo animation", "Reel editing", "Subtitles & captions", "YouTube thumbnails"],
+      },
+    ],
+  },
+  {
+    key: "performance-marketing",
+    name: "Performance Marketing",
+    icon: "ri-line-chart-line",
+    blurb: "Paid campaigns measured in leads, sales and ROAS — not just likes.",
+    services: [
+      {
+        slug: "google-ads-ppc",
+        title: "Google Ads (PPC)",
+        icon: "ri-google-line",
+        tagline: "Show up the moment customers search — and pay only for clicks.",
+        desc: "Search, Display, Performance Max, Shopping and YouTube campaigns managed for maximum conversions at the lowest cost per lead.",
+        features: ["Search & Performance Max", "Google Shopping campaigns", "YouTube video ads", "Keyword & negative lists", "Conversion tracking setup", "Weekly bid optimization"],
+      },
+      {
+        slug: "meta-ads-facebook-instagram",
+        title: "Meta Ads (Facebook & Instagram)",
+        icon: "ri-meta-line",
+        tagline: "Laser-targeted Facebook & Instagram campaigns that generate leads and sales.",
+        desc: "Full-funnel Meta campaigns with audience research, creative testing, retargeting and Pixel / Conversions API tracking.",
+        features: ["Lead generation campaigns", "Sales & catalog ads", "Retargeting funnels", "Lookalike audiences", "Pixel & CAPI setup", "Creative A/B testing"],
+      },
+      {
+        slug: "tiktok-ads",
+        title: "TikTok Ads",
+        icon: "ri-tiktok-line",
+        tagline: "Reach Pakistan's fastest-growing audience with native TikTok ads.",
+        desc: "Spark Ads, in-feed campaigns and creator-style videos that convert on Pakistan's fastest-growing platform.",
+        features: ["In-feed & Spark Ads", "Creator-style ad scripts", "TikTok Pixel setup", "Audience targeting", "Creative refresh cycles", "Performance reporting"],
+      },
+      {
+        slug: "linkedin-ads-b2b",
+        title: "LinkedIn Ads & B2B Leads",
+        icon: "ri-linkedin-box-line",
+        tagline: "Reach decision makers, CEOs and HR heads directly.",
+        desc: "B2B lead generation with LinkedIn Ads, lead gen forms and account-based targeting for corporate services.",
+        features: ["Decision-maker targeting", "Lead gen forms", "Account-based marketing", "Thought leadership ads", "CRM integration", "Cost per lead optimization"],
+      },
+      {
+        slug: "ecommerce-marketing",
+        title: "E-commerce Marketing",
+        icon: "ri-shopping-bag-3-line",
+        tagline: "Scale your online store's sales profitably.",
+        desc: "Shopify & WooCommerce growth: catalog ads, Shopping campaigns, retention flows and COD-friendly funnels for Pakistan.",
+        features: ["Catalog & dynamic ads", "Shopping feed optimization", "COD order confirmation flows", "Abandoned cart recovery", "Upsell & cross-sell", "ROAS scaling strategy"],
+      },
+      {
+        slug: "conversion-rate-optimization",
+        title: "Conversion Rate Optimization",
+        icon: "ri-funds-line",
+        tagline: "Get more leads from the same traffic.",
+        desc: "Heatmaps, A/B tests and landing page improvements that turn more of your visitors into customers.",
+        features: ["Funnel & heatmap analysis", "Landing page redesign", "A/B & split testing", "Form & checkout optimization", "Offer & copy testing", "Speed improvements"],
+      },
+      {
+        slug: "analytics-tracking",
+        title: "Analytics & Tracking",
+        icon: "ri-bar-chart-box-line",
+        tagline: "Know exactly which rupee brings back which sale.",
+        desc: "GA4, Google Tag Manager, Meta CAPI and Looker Studio dashboards so every decision is backed by data.",
+        features: ["GA4 setup & audit", "Google Tag Manager", "Meta Conversions API", "Call & WhatsApp tracking", "Looker Studio dashboards", "Attribution reporting"],
+      },
+    ],
+  },
+];
+
+// ---------- BLOG POSTS ----------
+export const posts = [
+  {
+    slug: "local-seo-guide-karachi-businesses",
+    title: "The Complete Local SEO Guide for Karachi Businesses (2026)",
+    cat: "Local SEO",
+    date: "2026-10-28",
+    read: 8,
+    excerpt: "How restaurants, clinics, salons and showrooms in Karachi can rank in the Google Map Pack and get more calls without paying for every click.",
+    body: [
+      ["p", "When someone in Karachi searches “best dentist near me” or “bakery in DHA Phase 6”, Google shows three businesses on a map before any website. That box — the Map Pack — gets the majority of calls and direction requests. Local SEO is the practice of getting your business into it."],
+      ["h2", "1. Claim and complete your Google Business Profile"],
+      ["p", "Your Google Business Profile (GBP) is the single biggest local ranking factor. Choose the most specific primary category, add secondary categories, write a keyword-rich description, upload real photos every week and list every service you offer with a short description."],
+      ["h2", "2. Keep your NAP consistent everywhere"],
+      ["p", "NAP means Name, Address, Phone. It must be identical on your website, Google, Facebook, and Pakistani directories. Even small differences such as “Block 13-D” versus “13D” can confuse Google."],
+      ["h2", "3. Build area-based landing pages"],
+      ["p", "If you serve customers across Karachi, create genuinely useful pages for key areas — DHA, Clifton, Gulshan-e-Iqbal, PECHS, North Nazimabad — with local details, directions and testimonials from customers in that area."],
+      ["h2", "4. Turn reviews into a system"],
+      ["p", "Ask every happy customer for a review using a short link or QR code at the counter. Reply to every review, good or bad, within 24 hours. Volume, freshness and replies all influence ranking."],
+      ["h2", "5. Track calls, not just rankings"],
+      ["p", "Rankings are vanity if the phone doesn't ring. Track GBP calls, direction requests and WhatsApp clicks every month to see the real return on your local SEO."],
+    ],
+  },
+  {
+    slug: "meta-ads-vs-google-ads-pakistan",
+    title: "Meta Ads vs Google Ads: Which Is Better for Pakistani Businesses?",
+    cat: "Performance Marketing",
+    date: "2026-10-14",
+    read: 6,
+    excerpt: "A practical comparison of cost, intent and results — and how to decide where your first PKR 100,000 of ad budget should go.",
+    body: [
+      ["p", "This is the question I hear most from business owners in Karachi. The honest answer: it depends on whether people are already searching for what you sell."],
+      ["h2", "Google Ads captures existing demand"],
+      ["p", "If customers search for your service — “AC repair Karachi”, “car rental Clifton” — Google Ads puts you in front of them at the moment of intent. Leads are usually higher quality, but cost per click can be higher in competitive niches."],
+      ["h2", "Meta Ads creates new demand"],
+      ["p", "Facebook and Instagram are perfect for products people don't search for yet: fashion, food, home décor, events and new launches. Strong creatives and offers matter more here than keywords."],
+      ["h2", "My recommendation"],
+      ["p", "Service businesses with search demand should start with Google Search. Product and lifestyle brands should start with Meta. Once profitable, combine both — Google for intent and Meta for awareness and retargeting."],
+    ],
+  },
+  {
+    slug: "google-business-profile-optimization-tips",
+    title: "15 Google Business Profile Tips to Get More Calls in Karachi",
+    cat: "Local SEO",
+    date: "2026-09-30",
+    read: 7,
+    excerpt: "Small changes to your Google Business Profile that can double your calls and direction requests within weeks.",
+    body: [
+      ["p", "Your Google Business Profile is often the first impression of your business. Here are the optimizations I apply for every local client."],
+      ["h2", "Profile basics"],
+      ["ul", ["Use your real business name — no keyword stuffing", "Pick the most specific primary category", "Add accurate hours, including Ramadan and Eid timings", "Add your WhatsApp number and booking link"]],
+      ["h2", "Content that ranks"],
+      ["ul", ["Upload fresh photos weekly — interior, team and products", "Publish a Google Post every week with an offer", "Add every product and service with prices where possible", "Seed the Q&A section with real customer questions"]],
+      ["h2", "Reviews and engagement"],
+      ["ul", ["Create a short review link and QR code", "Reply to every review with keywords naturally", "Encourage photo reviews", "Track calls and direction requests monthly"]],
+    ],
+  },
+  {
+    slug: "social-media-strategy-small-business",
+    title: "A Social Media Strategy That Actually Sells for Small Businesses",
+    cat: "Digital Marketing",
+    date: "2026-09-12",
+    read: 5,
+    excerpt: "Stop posting randomly. Use this simple content framework to grow followers who actually buy.",
+    body: [
+      ["p", "Most small businesses post when they remember and then wonder why nothing happens. A simple framework fixes that."],
+      ["h2", "The 4-pillar content mix"],
+      ["ul", ["Educate — tips and how-tos your customers value", "Prove — reviews, before/after, case studies", "Connect — behind the scenes and your team", "Sell — clear offers with a single call to action"]],
+      ["h2", "Make reels your priority"],
+      ["p", "Short-form video gets the most reach on Instagram, Facebook and TikTok in Pakistan. Keep it under 30 seconds, hook in the first second and add subtitles."],
+      ["h2", "Measure what matters"],
+      ["p", "Track DMs, WhatsApp clicks and sales from social — not just likes. Double down on the content types that bring inquiries."],
+    ],
+  },
+  {
+    slug: "branding-mistakes-startups",
+    title: "7 Branding Mistakes Pakistani Startups Make (and How to Fix Them)",
+    cat: "Graphic Design",
+    date: "2026-08-25",
+    read: 6,
+    excerpt: "Your brand is more than a logo. Avoid these common mistakes that make startups look small and untrustworthy.",
+    body: [
+      ["p", "A strong brand lets you charge more and spend less on ads. These are the mistakes I see most often."],
+      ["ol", ["Designing a logo before defining the audience", "Using too many colours and fonts", "Inconsistent visuals across platforms", "Copying a competitor's look", "No brand guidelines for the team", "Ignoring how the logo looks small on mobile", "Never refreshing tired creatives"]],
+      ["h2", "The fix"],
+      ["p", "Start with strategy: who you serve and why you're different. Then build a simple identity system — logo, two or three colours, two fonts and a set of templates — and use it everywhere."],
+    ],
+  },
+  {
+    slug: "ecommerce-roas-scaling-pakistan",
+    title: "How to Scale an E-commerce Store in Pakistan Profitably",
+    cat: "Performance Marketing",
+    date: "2026-08-08",
+    read: 9,
+    excerpt: "COD returns, rising ad costs and creative fatigue — a playbook for scaling a Pakistani online store without burning cash.",
+    body: [
+      ["p", "Scaling an online store in Pakistan has unique challenges: cash on delivery, high return rates and fast creative fatigue. Here's the playbook I use."],
+      ["h2", "1. Fix tracking first"],
+      ["p", "Set up the Meta Pixel with Conversions API and GA4 e-commerce events. Without accurate data, every scaling decision is a guess."],
+      ["h2", "2. Reduce COD returns"],
+      ["p", "Confirm every order on WhatsApp before dispatch, offer a small discount for prepaid orders and set clear delivery timelines."],
+      ["h2", "3. Test creatives weekly"],
+      ["p", "Launch three to five new creatives every week. Winners are scaled gradually; losers are paused fast."],
+      ["h2", "4. Build retention"],
+      ["p", "WhatsApp broadcasts and email flows turn one-time buyers into repeat customers — the cheapest sales you'll ever make."],
+    ],
+  },
+];
+
+// ---------- PORTFOLIO (home page) ----------
+export const portfolio = [
+  { cat: "digital-marketing", title: "Restaurant Chain — Local SEO", tag: "Local SEO", result: "+240% Map calls" },
+  { cat: "performance-marketing", title: "Fashion Store — Meta Ads", tag: "Meta Ads", result: "6.2x ROAS" },
+  { cat: "graphic-design", title: "Real Estate — Brand Identity", tag: "Branding", result: "Full rebrand" },
+  { cat: "performance-marketing", title: "Healthcare Clinic — Google Ads", tag: "Google Ads", result: "-45% cost per lead" },
+  { cat: "digital-marketing", title: "Education Institute — SEO", tag: "SEO", result: "3x organic traffic" },
+  { cat: "graphic-design", title: "Food Brand — Packaging", tag: "Packaging", result: "12 SKUs designed" },
+  { cat: "performance-marketing", title: "B2B Company — LinkedIn Ads", tag: "LinkedIn Ads", result: "320+ B2B leads" },
+];
+
+// ---------- KARACHI AREAS (Local SEO) ----------
+export const areas = [
+  "DHA", "Clifton", "Gulshan-e-Iqbal", "PECHS", "Saddar", "North Nazimabad",
+  "Gulistan-e-Johar", "Bahria Town Karachi", "Korangi", "SITE Area", "Tariq Road",
+  "Shahrah-e-Faisal", "Nazimabad", "Federal B Area", "Malir", "Scheme 33",
+  "Bahadurabad", "Defence View", "Karsaz", "I.I. Chundrigar Road",
+];
+
+export const faqs = [
+  ["Why hire a Karachi-based digital marketing expert instead of a large agency?", "You work directly with me — not a junior account manager. With 13+ years of experience and deep knowledge of the Karachi market, I build strategies that fit local customer behaviour, budgets and competition."],
+  ["How long does SEO take to show results?", "Local SEO improvements often show within 4–8 weeks. Competitive organic SEO usually takes 3–6 months to build strong, lasting rankings. You get transparent monthly reports throughout."],
+  ["What is the minimum budget for Google or Meta ads?", "It depends on your industry and goals. Many Karachi businesses start testing with a modest monthly ad spend. I'll recommend a realistic budget after a free consultation."],
+  ["Do you work with businesses outside Karachi?", "Yes. While I specialise in Karachi and Pakistan, I also work with clients across Pakistan, the UAE, the UK and the USA."],
+  ["Can I meet you in person?", "Absolutely. I'm based in Karachi and happy to meet at your office or mine for strategy sessions. Online meetings are also available."],
+  ["Do you offer graphic design along with marketing?", "Yes — branding, social media creatives, packaging, print and motion graphics are all handled in-house so your marketing and visuals stay perfectly aligned."],
+];
