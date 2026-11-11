@@ -3,7 +3,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { site, categories, posts, portfolio, areas, faqs } from "./data.mjs";
+import { site, categories, posts, portfolio, areas, faqs, pricing, seoGame } from "./data.mjs";
 import {
   head, header, footer, pageHero, ctaBand, ph, esc, waLink,
   businessSchema, personSchema, crumbSchema,
@@ -21,6 +21,12 @@ const page = ({ path, active, title, description, schema, body }) => {
   const b = path.includes("/") ? "../" : "";
   out(path, head({ title, description, path, b, schema }) + header(b, active) + `\n<main id="main">${body(b)}</main>` + footer(b, active));
 };
+
+// Animated "New SEO" roadmap geometry (SVG viewBox 1200 x 660): a 3-row snake.
+const SG_START = [70, 110];
+const SG_NODES = [[300, 110], [620, 110], [940, 110], [940, 330], [620, 330], [300, 330], [300, 550], [620, 550], [940, 550]];
+const SG_END = [1130, 550];
+const SG_PATH = "M70 110 H1050 Q1110 110 1110 170 V270 Q1110 330 1050 330 H150 Q90 330 90 390 V490 Q90 550 150 550 H1130";
 
 const allServices = categories.flatMap((c) => c.services.map((s) => ({ ...s, cat: c })));
 const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
@@ -236,6 +242,51 @@ page({
   </div>
 </section>
 
+<!-- ============ THE NEW SEO GAME (animated) ============ -->
+<section class="section seo-game" id="seo-game">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Search Everywhere Optimisation</span>
+      <h2>The <span class="text-red">“New SEO”</span> Game</h2>
+      <p>SEO is no longer just Google. I make your brand visible everywhere your customers search — Google, AI assistants, YouTube, TikTok and online communities.</p>
+    </div>
+    <div class="sg" data-sg>
+      <svg class="sg__svg" viewBox="0 0 1200 660" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="sg-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3b4f"/><stop offset="1" stop-color="#b80f22"/></linearGradient>
+          <filter id="sg-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <path class="sg__track" d="${SG_PATH}"/>
+        <path class="sg__flow" d="${SG_PATH}"/>
+        <path class="sg__line" d="${SG_PATH}" stroke="url(#sg-grad)"/>
+        <circle class="sg__comet" r="5" filter="url(#sg-glow)"/>
+        <circle class="sg__player" r="9" filter="url(#sg-glow)"/>
+      </svg>
+      <div class="sg__start" style="left:${(SG_START[0] / 12).toFixed(3)}%;top:${(SG_START[1] / 6.6).toFixed(3)}%">START</div>
+      ${seoGame
+        .map(
+          (l, i) => `
+      <article class="sg__level" data-level="${i}" style="left:${(SG_NODES[i][0] / 12).toFixed(3)}%;top:${(SG_NODES[i][1] / 6.6).toFixed(3)}%">
+        <span class="sg__lvl">Level ${i + 1}</span>
+        <div class="sg__card">
+          <i class="${l.icon}"></i>
+          <div><h3>${l.title}</h3><p>${l.desc}</p></div>
+        </div>
+      </article>`
+        )
+        .join("")}
+      <div class="sg__finish" style="left:${(SG_END[0] / 12).toFixed(3)}%;top:${(SG_END[1] / 6.6).toFixed(3)}%" aria-hidden="true">
+        <svg class="sg__flag" viewBox="0 0 40 48"><path class="sg__pole" d="M6 2v44"/><path class="sg__cloth" d="M7 4c8-4 14 4 26 0v18c-12 4-18-4-26 0z"/></svg>
+        <span class="sg__pad"></span>
+      </div>
+    </div>
+    <div class="center mt-40 reveal">
+      <a class="btn btn--red" href="${b}services/seo-services-karachi.html">Start Winning the New SEO Game <i class="ri-arrow-right-up-line"></i></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PROCESS ============ -->
 <section class="section" id="process">
   <div class="container">
@@ -391,6 +442,56 @@ page({
         <figcaption><span class="tcard__avatar"><i class="ri-user-3-line"></i></span><div><strong>Client Name</strong><small>${r} · ${l}</small></div></figcaption>
         <i class="ri-double-quotes-r tcard__q" aria-hidden="true"></i>
       </figure>`).join("")}
+    </div>
+  </div>
+</section>
+
+<!-- ============ PACKAGES / PRICING ============ -->
+<section class="section" id="packages">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    ${sectionHead("Packages", `Simple, Transparent <span class="text-red">Pricing</span>`, "Choose a monthly growth package — or let's build a custom plan around your goals and budget.")}
+    <div class="billing reveal" role="radiogroup" aria-label="Billing period">
+      <button class="billing__opt is-active" role="radio" aria-checked="true" data-billing="monthly">Monthly</button>
+      <button class="billing__opt" role="radio" aria-checked="false" data-billing="quarterly">Quarterly <span class="billing__save">Save ${pricing.quarterlyDiscount}%</span></button>
+      <span class="billing__pill" aria-hidden="true"></span>
+    </div>
+    <div class="plans" data-discount="${pricing.quarterlyDiscount}">
+      ${pricing.packages
+        .map(
+          (pk, i) => `
+      <article class="plan${pk.popular ? " plan--popular" : ""} reveal" style="--d:${i * 0.1}s">
+        ${pk.popular ? `<span class="plan__badge"><i class="ri-fire-fill"></i> Most Popular</span>` : ""}
+        <div class="plan__head">
+          <span class="plan__icon"><i class="${pk.icon}"></i></span>
+          <h3>${pk.name}</h3>
+        </div>
+        <p class="plan__tag">${pk.tagline}</p>
+        <div class="plan__price">
+          <span class="plan__cur">${pricing.currency}</span>
+          <strong data-price="${pk.price}">${pk.price.toLocaleString("en-US")}</strong>
+          <span class="plan__per">/ month</span>
+        </div>
+        <p class="plan__bill" data-bill>Billed monthly · cancel anytime</p>
+        <a class="btn ${pk.popular ? "btn--red" : "btn--ghost"} btn--block" href="${waLink(`Hi Zeeshan, I'm interested in the ${pk.name} package.`)}" target="_blank" rel="noopener" data-plan="${pk.name}">Get ${pk.name} <i class="ri-arrow-right-up-line"></i></a>
+        <ul class="plan__list">
+          ${pk.features.map((f) => `<li><i class="ri-check-line"></i>${f}</li>`).join("")}
+          ${pk.excluded.map((f) => `<li class="is-off"><i class="ri-close-line"></i>${f}</li>`).join("")}
+        </ul>
+      </article>`
+        )
+        .join("")}
+    </div>
+    <div class="plans-foot reveal">
+      <div class="plans-foot__trust">
+        <span><i class="ri-shake-hands-line"></i> No long-term contracts</span>
+        <span><i class="ri-file-chart-line"></i> Transparent reporting</span>
+        <span><i class="ri-shield-check-line"></i> Your ad accounts stay yours</span>
+      </div>
+      <div class="plans-custom glass">
+        <div><h3>Need a custom plan?</h3><p>${pricing.note} Let's build a package around your exact goals.</p></div>
+        <a class="btn btn--red" href="${b}connect.html">Get Custom Quote <i class="ri-arrow-right-up-line"></i></a>
+      </div>
     </div>
   </div>
 </section>

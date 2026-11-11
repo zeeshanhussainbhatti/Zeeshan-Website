@@ -348,3 +348,76 @@ export const faqs = [
   ["Can I meet you in person?", "Absolutely. I'm based in Karachi and happy to meet at your office or mine for strategy sessions. Online meetings are also available."],
   ["Do you offer graphic design along with marketing?", "Yes — branding, social media creatives, packaging, print and motion graphics are all handled in-house so your marketing and visuals stay perfectly aligned."],
 ];
+
+// ---------- PACKAGES / PRICING (home page) ----------
+// TODO: set your real prices (PKR per month). Ad spend is paid directly to Google / Meta / TikTok.
+export const pricing = {
+  currency: "PKR",
+  quarterlyDiscount: 10, // % off per month when billed quarterly
+  note: "Ad spend is paid directly to Google, Meta or TikTok and is not included in the management fee.",
+  packages: [
+    {
+      name: "Starter",
+      icon: "ri-seedling-line",
+      tagline: "For new & small local businesses getting found online.",
+      price: 35000,
+      features: [
+        "Google Business Profile optimization",
+        "Local SEO — up to 10 keywords",
+        "1 social platform managed",
+        "12 custom post designs / month",
+        "Meta Ads management (spend up to PKR 100k)",
+        "Monthly performance report",
+      ],
+      excluded: ["Google Ads campaigns", "Conversion tracking setup", "Landing page & CRO"],
+    },
+    {
+      name: "Growth",
+      icon: "ri-rocket-2-line",
+      popular: true,
+      tagline: "For growing brands that want consistent leads & sales.",
+      price: 75000,
+      features: [
+        "Everything in Starter",
+        "Local + on-page SEO — up to 25 keywords",
+        "2 social platforms managed",
+        "20 post designs + 4 reels / month",
+        "Meta + Google Ads (spend up to PKR 300k)",
+        "GA4, Pixel & call / WhatsApp tracking",
+        "Bi-weekly report + monthly strategy call",
+      ],
+      excluded: ["Landing page & CRO"],
+    },
+    {
+      name: "Premium",
+      icon: "ri-vip-crown-2-line",
+      tagline: "Full-funnel growth partner for established businesses.",
+      price: 150000,
+      features: [
+        "Everything in Growth",
+        "Full SEO — 50 keywords + 4 blogs / month",
+        "3 social platforms managed",
+        "30 post designs + 8 reels / month",
+        "Meta + Google + TikTok Ads (any spend)",
+        "Landing page design & CRO testing",
+        "Weekly reports + live Looker dashboard",
+        "Priority WhatsApp support",
+      ],
+      excluded: [],
+    },
+  ],
+};
+
+
+// ---------- THE "NEW SEO" GAME (home page, animated roadmap) ----------
+export const seoGame = [
+  { title: "Traditional SEO", desc: "Keywords, backlinks, on-page & technical", icon: "ri-search-line" },
+  { title: "AI Search Optimisation", desc: "Google AI Overviews, AI Mode, ChatGPT Search", icon: "ri-sparkling-2-line" },
+  { title: "Paid Search Visibility", desc: "Google Search Ads, YouTube Ads", icon: "ri-google-line" },
+  { title: "LLM Answer SEO", desc: "ChatGPT, Perplexity, Claude, Gemini", icon: "ri-robot-2-line" },
+  { title: "Brand Authority SEO", desc: "Brand mentions, citations, roundups", icon: "ri-medal-line" },
+  { title: "Community SEO", desc: "Reddit, Quora, Facebook groups", icon: "ri-team-line" },
+  { title: "Parasite SEO", desc: "Publishing on high-authority platforms", icon: "ri-links-line" },
+  { title: "Platform-Specific SEO", desc: "YouTube, TikTok, Instagram, Daraz", icon: "ri-apps-2-line" },
+  { title: "Topic Domination", desc: "Own every search in your niche", icon: "ri-trophy-line" },
+];

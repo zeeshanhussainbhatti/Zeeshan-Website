@@ -15,7 +15,7 @@ A fast, mobile-first personal brand website in a black & red tech theme, built w
 | 404 | `404.html` |
 | SEO | `sitemap.xml`, `robots.txt`, JSON-LD schema on every page |
 
-**Home sections:** Hero slider (content on the left, photo on the right) → platform marquee → stats counters → About → 3 service pillars → 4-step process → Portfolio (filterable) → Case studies → Why choose me + live dashboard → Industries → Karachi areas + map → Skills & tools → Testimonials → FAQ → Blog → Contact form → CTA.
+**Home sections:** Hero slider (content on the left, photo on the right) → platform marquee → stats counters → About → 3 service pillars → animated "New SEO Game" roadmap → 4-step process → Portfolio (filterable) → Case studies → Why choose me + live dashboard → Industries → Karachi areas + map → Skills & tools → Testimonials → Packages / pricing (monthly ↔ quarterly toggle) → FAQ → Blog → Contact form → CTA.
 
 **Mobile:** a sticky, app-style bottom navigation (Home · Services · WhatsApp · Blogs · Connect). The Services button opens a bottom sheet that lists every service.
 
@@ -54,8 +54,9 @@ Page layouts and sections are in `src/build.mjs`. The header, mega menu, footer 
    (Use `${b}assets/img/...` so the path also works on pages inside the `services/` and `blog/` folders.)
 3. **Numbers and claims.** Update the stats (13+ years, 500+ projects, 250+ clients, PKR 50M+), case-study results, portfolio results and certifications so they match your real work.
 4. **Testimonials.** The current quotes are **samples** with "Client Name". Replace them with real client reviews.
-5. **Map.** Change the Google Maps query (`Shahrah-e-Faisal Karachi`) to your exact office address.
-6. Add `assets/img/og.jpg` (1200×630) for social sharing previews.
+5. **Prices.** The package prices and features in `pricing` (in `src/data.mjs`) are starting suggestions. Set your real prices before going live.
+6. **Map.** Change the Google Maps query (`Shahrah-e-Faisal Karachi`) to your exact office address.
+7. Add `assets/img/og.jpg` (1200×630) for social sharing previews.
 
 ## Run locally
 

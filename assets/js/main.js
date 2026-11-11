@@ -175,6 +175,110 @@
     );
   });
 
+  /* ---------- Pricing: monthly / quarterly toggle ---------- */
+  const billing = $(".billing");
+  if (billing) {
+    const plans = $(".plans");
+    const off = +plans.dataset.discount || 0;
+    const opts = $$(".billing__opt", billing);
+    const place = (btn) => {
+      billing.style.setProperty("--pw", btn.offsetWidth + "px");
+      billing.style.setProperty("--px", btn.offsetLeft - 5 + "px");
+    };
+    const fmt = (n) => n.toLocaleString("en-US");
+    const setBilling = (btn) => {
+      const q = btn.dataset.billing === "quarterly";
+      opts.forEach((o) => { o.classList.toggle("is-active", o === btn); o.setAttribute("aria-checked", String(o === btn)); });
+      place(btn);
+      $$("[data-price]", plans).forEach((el) => {
+        const base = +el.dataset.price;
+        const val = q ? Math.round((base * (100 - off)) / 100 / 500) * 500 : base;
+        el.textContent = fmt(val);
+        el.classList.remove("is-tick"); void el.offsetWidth; el.classList.add("is-tick");
+        el.closest(".plan").querySelector("[data-bill]").innerHTML = q
+          ? `Billed PKR ${fmt(val * 3)} every 3 months · <b>save PKR ${fmt((base - val) * 3)}</b>`
+          : "Billed monthly · cancel anytime";
+      });
+      $$("[data-plan]", plans).forEach((a) => {
+        const msg = `Hi Zeeshan, I'm interested in the ${a.dataset.plan} package (${q ? "quarterly" : "monthly"} billing).`;
+        a.href = a.href.replace(/text=.*/, "text=" + encodeURIComponent(msg));
+      });
+    };
+    opts.forEach((o) => o.addEventListener("click", () => setBilling(o)));
+    place(opts[0]);
+    window.addEventListener("resize", () => place($(".billing__opt.is-active", billing)));
+  }
+
+  /* ---------- "New SEO" game: animated roadmap ---------- */
+  const sg = $("[data-sg]");
+  if (sg) {
+    const levels = $$(".sg__level", sg);
+    const line = $(".sg__line", sg), player = $(".sg__player", sg), comet = $(".sg__comet", sg);
+    const mobile = window.matchMedia("(max-width: 991px)");
+    const len = mobile.matches ? 0 : line.getTotalLength();
+    // path length at which each level card sits (closest point on the path)
+    const stops = mobile.matches ? [] : levels.map((lv) => {
+      const r = sg.getBoundingClientRect(), c = lv.getBoundingClientRect();
+      const tx = ((c.left + c.width / 2 - r.left) / r.width) * 1200, ty = ((c.top + c.height / 2 - r.top) / r.height) * 660;
+      let best = 0, bd = Infinity;
+      for (let l = 0; l <= len; l += 4) { const pt = line.getPointAtLength(l), d = (pt.x - tx) ** 2 + (pt.y - ty) ** 2; if (d < bd) { bd = d; best = l; } }
+      return best / len;
+    });
+    const light = (p) => levels.forEach((lv, i) => {
+      const on = p >= (mobile.matches ? (i + 1) / (levels.length + 1) : stops[i]) - 0.002;
+      if (on && !lv.classList.contains("is-on")) { lv.classList.add("is-on", "is-hit"); setTimeout(() => lv.classList.remove("is-hit"), 650); }
+      if (!on) lv.classList.remove("is-on");
+    });
+    const draw = (p) => {
+      if (!len) return;
+      line.style.strokeDasharray = len;
+      line.style.strokeDashoffset = len * (1 - p);
+      const pt = line.getPointAtLength(len * p);
+      player.setAttribute("cx", pt.x); player.setAttribute("cy", pt.y);
+      sg.style.setProperty("--p", p);
+      light(p);
+    };
+    let started = false, cometRaf;
+    const loopComet = () => {
+      cancelAnimationFrame(cometRaf);
+      const t0 = performance.now();
+      const step = (t) => {
+        const pt = line.getPointAtLength(len * (((t - t0) / 5000) % 1));
+        comet.setAttribute("cx", pt.x); comet.setAttribute("cy", pt.y);
+        cometRaf = requestAnimationFrame(step);
+      };
+      cometRaf = requestAnimationFrame(step);
+    };
+    const play = () => {
+      if (started) return; started = true;
+      if (reduce) { draw(1); sg.classList.add("is-done"); return; }
+      sg.classList.add("is-playing");
+      const DUR = 6500, t0 = performance.now();
+      const ease = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+      const step = (t) => {
+        const k = Math.min((t - t0) / DUR, 1);
+        draw(ease(k));
+        if (k < 1) requestAnimationFrame(step);
+        else { sg.classList.remove("is-playing"); sg.classList.add("is-done"); loopComet(); }
+      };
+      requestAnimationFrame(step);
+    };
+    // Mobile: the timeline fills as you scroll. Desktop: plays once the board is in view.
+    const onScroll = () => {
+      if (!mobile.matches) return;
+      const r = sg.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (window.innerHeight * 0.65 - r.top) / r.height));
+      sg.style.setProperty("--p", p); light(p);
+      if (p >= 1) sg.classList.add("is-done");
+    };
+    draw(0);
+    if (mobile.matches) { window.addEventListener("scroll", onScroll, { passive: true }); onScroll(); }
+    else if ("IntersectionObserver" in window) {
+      new IntersectionObserver((en, o) => { if (en[0].isIntersecting) { play(); o.disconnect(); } }, { threshold: 0.35 }).observe(sg);
+    } else play();
+    document.addEventListener("visibilitychange", () => { if (document.hidden) cancelAnimationFrame(cometRaf); else if (sg.classList.contains("is-done") && !mobile.matches) loopComet(); });
+  }
+
   /* ---------- Testimonials slider ---------- */
   const ts = $(".tslider");
   if (ts) {
