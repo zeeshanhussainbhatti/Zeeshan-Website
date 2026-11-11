@@ -209,74 +209,100 @@
     window.addEventListener("resize", () => place($(".billing__opt.is-active", billing)));
   }
 
-  /* ---------- "New SEO" game: animated roadmap ---------- */
+  /* ---------- "New SEO" game: ball runs START -> finish on a loop ---------- */
   const sg = $("[data-sg]");
   if (sg) {
     const levels = $$(".sg__level", sg);
-    const line = $(".sg__line", sg), player = $(".sg__player", sg), comet = $(".sg__comet", sg);
+    const line = $(".sg__line", sg);
+    const ball = $(".sg__ball", sg), halo = $(".sg__halo", sg);
+    const trail = $$(".sg__trail circle", sg);
     const mobile = window.matchMedia("(max-width: 991px)");
-    const len = mobile.matches ? 0 : line.getTotalLength();
-    // path length at which each level card sits (closest point on the path)
-    const stops = mobile.matches ? [] : levels.map((lv) => {
-      const r = sg.getBoundingClientRect(), c = lv.getBoundingClientRect();
-      const tx = ((c.left + c.width / 2 - r.left) / r.width) * 1200, ty = ((c.top + c.height / 2 - r.top) / r.height) * 660;
-      let best = 0, bd = Infinity;
-      for (let l = 0; l <= len; l += 4) { const pt = line.getPointAtLength(l), d = (pt.x - tx) ** 2 + (pt.y - ty) ** 2; if (d < bd) { bd = d; best = l; } }
-      return best / len;
-    });
-    const light = (p) => levels.forEach((lv, i) => {
-      const on = p >= (mobile.matches ? (i + 1) / (levels.length + 1) : stops[i]) - 0.002;
-      if (on && !lv.classList.contains("is-on")) { lv.classList.add("is-on", "is-hit"); setTimeout(() => lv.classList.remove("is-hit"), 650); }
-      if (!on) lv.classList.remove("is-on");
-    });
-    const draw = (p) => {
-      if (!len) return;
-      line.style.strokeDasharray = len;
-      line.style.strokeDashoffset = len * (1 - p);
-      const pt = line.getPointAtLength(len * p);
-      player.setAttribute("cx", pt.x); player.setAttribute("cy", pt.y);
-      sg.style.setProperty("--p", p);
-      light(p);
-    };
-    let started = false, cometRaf;
-    const loopComet = () => {
-      cancelAnimationFrame(cometRaf);
-      const t0 = performance.now();
-      const step = (t) => {
-        const pt = line.getPointAtLength(len * (((t - t0) / 5000) % 1));
-        comet.setAttribute("cx", pt.x); comet.setAttribute("cy", pt.y);
-        cometRaf = requestAnimationFrame(step);
-      };
-      cometRaf = requestAnimationFrame(step);
-    };
-    const play = () => {
-      if (started) return; started = true;
-      if (reduce) { draw(1); sg.classList.add("is-done"); return; }
-      sg.classList.add("is-playing");
-      const DUR = 6500, t0 = performance.now();
-      const ease = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
-      const step = (t) => {
-        const k = Math.min((t - t0) / DUR, 1);
-        draw(ease(k));
-        if (k < 1) requestAnimationFrame(step);
-        else { sg.classList.remove("is-playing"); sg.classList.add("is-done"); loopComet(); }
-      };
-      requestAnimationFrame(step);
-    };
-    // Mobile: the timeline fills as you scroll. Desktop: plays once the board is in view.
-    const onScroll = () => {
-      if (!mobile.matches) return;
+    const LAP = 7000, REST = 1100; // ms per run, pause at the flag
+    let len = 0, stops = [], reached = 0, running = false, raf = 0, lapStart = 0, lastP = 0, firstLap = true;
+
+    // where each level sits along the route (0..1)
+    const measure = () => {
       const r = sg.getBoundingClientRect();
-      const p = Math.max(0, Math.min(1, (window.innerHeight * 0.65 - r.top) / r.height));
-      sg.style.setProperty("--p", p); light(p);
-      if (p >= 1) sg.classList.add("is-done");
+      if (mobile.matches) {
+        len = 0;
+        stops = levels.map((lv) => { const c = lv.getBoundingClientRect(); return (c.top + c.height / 2 - r.top) / r.height; });
+        return;
+      }
+      len = line.getTotalLength();
+      line.style.strokeDasharray = len;
+      stops = levels.map((lv) => {
+        const c = lv.getBoundingClientRect();
+        const tx = ((c.left + c.width / 2 - r.left) / r.width) * 1200, ty = ((c.top + c.height / 2 - r.top) / r.height) * 660;
+        let best = 0, bd = Infinity;
+        for (let l = 0; l <= len; l += 4) { const pt = line.getPointAtLength(l), d = (pt.x - tx) ** 2 + (pt.y - ty) ** 2; if (d < bd) { bd = d; best = l; } }
+        return best / len;
+      });
     };
-    draw(0);
-    if (mobile.matches) { window.addEventListener("scroll", onScroll, { passive: true }); onScroll(); }
-    else if ("IntersectionObserver" in window) {
-      new IntersectionObserver((en, o) => { if (en[0].isIntersecting) { play(); o.disconnect(); } }, { threshold: 0.35 }).observe(sg);
-    } else play();
-    document.addEventListener("visibilitychange", () => { if (document.hidden) cancelAnimationFrame(cometRaf); else if (sg.classList.contains("is-done") && !mobile.matches) loopComet(); });
+    const at = (p) => line.getPointAtLength(len * Math.max(0, Math.min(1, p)));
+    const place = (el, p) => { const pt = at(p); el.setAttribute("cx", pt.x); el.setAttribute("cy", pt.y); };
+
+    const render = (p) => {
+      reached = Math.max(reached, p);
+      sg.style.setProperty("--p", reached);
+      sg.style.setProperty("--b", p);
+      if (len) {
+        line.style.strokeDashoffset = len * (1 - reached);
+        place(ball, p); place(halo, p);
+        trail.forEach((c, i) => place(c, p - (i + 1) * 0.012));
+      }
+      // light up levels the ball passes; pulse them every lap
+      levels.forEach((lv, i) => {
+        const s = stops[i];
+        if (p >= s) lv.classList.add("is-on");
+        if (lastP < s && p >= s) { lv.classList.remove("is-hit"); void lv.offsetWidth; lv.classList.add("is-hit"); }
+      });
+      lastP = p;
+    };
+
+    const smooth = (x) => x * x * (3 - 2 * x);
+    const tick = (t) => {
+      if (!running) return;
+      const k = (t - lapStart) / LAP;
+      if (k < 1) {
+        render(smooth(Math.max(0, k)));
+      } else if (k * LAP < LAP + REST) {
+        if (!sg.classList.contains("is-cheer")) {
+          render(1);
+          sg.classList.add("is-done", "is-cheer");
+          firstLap = false;
+        }
+        sg.classList.remove("is-running");
+      } else {
+        // back to START for the next run
+        sg.classList.remove("is-cheer");
+        sg.classList.add("is-running");
+        lastP = 0; lapStart = t;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    const start = () => {
+      if (running) return;
+      running = true;
+      sg.classList.add("is-running");
+      lapStart = performance.now() - (firstLap ? 0 : 0);
+      lastP = 0;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => { running = false; cancelAnimationFrame(raf); };
+
+    measure();
+    if (reduce) {
+      reached = 1; render(1); sg.classList.add("is-done");
+    } else {
+      render(0);
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([en]) => (en.isIntersecting ? start() : stop()), { threshold: 0.25 }).observe(sg);
+      } else start();
+      document.addEventListener("visibilitychange", () => (document.hidden ? stop() : sg.getBoundingClientRect().top < innerHeight && start()));
+    }
+    let rt;
+    window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { measure(); render(lastP); }, 200); });
+    mobile.addEventListener && mobile.addEventListener("change", () => { measure(); render(lastP); });
   }
 
   /* ---------- Testimonials slider ---------- */

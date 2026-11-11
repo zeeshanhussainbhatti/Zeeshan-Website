@@ -260,9 +260,13 @@ page({
         <path class="sg__track" d="${SG_PATH}"/>
         <path class="sg__flow" d="${SG_PATH}"/>
         <path class="sg__line" d="${SG_PATH}" stroke="url(#sg-grad)"/>
-        <circle class="sg__comet" r="5" filter="url(#sg-glow)"/>
-        <circle class="sg__player" r="9" filter="url(#sg-glow)"/>
       </svg>
+      <svg class="sg__svg sg__fx" viewBox="0 0 1200 660" preserveAspectRatio="none" aria-hidden="true">
+        <g class="sg__trail"><circle r="7"/><circle r="5"/><circle r="3.5"/></g>
+        <circle class="sg__halo" r="22"/>
+        <circle class="sg__ball" r="11" filter="url(#sg-glow)"/>
+      </svg>
+      <span class="sg__mball" aria-hidden="true"></span>
       <div class="sg__start" style="left:${(SG_START[0] / 12).toFixed(3)}%;top:${(SG_START[1] / 6.6).toFixed(3)}%">START</div>
       ${seoGame
         .map(
