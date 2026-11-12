@@ -1,26 +1,28 @@
 /* =========================================================
    Zeeshan Hussain Bhatti — Digital Marketing Expert
-   Theme: Professional Black & Red · Tech-driven
+   Theme: Neon red on deep black · Chakra Petch / Sora / JetBrains Mono
    ========================================================= */
 :root {
-  --bg: #0a0a0c;
-  --bg-2: #101014;
-  --bg-3: #16161b;
-  --card: rgba(255, 255, 255, 0.035);
-  --line: rgba(255, 255, 255, 0.08);
-  --line-2: rgba(255, 255, 255, 0.14);
-  --text: #f5f5f7;
-  --muted: #a3a3ad;
-  --red: #e3182d;
-  --red-2: #ff3b4f;
-  --red-deep: #9e0c1c;
-  --red-glow: rgba(227, 24, 45, 0.45);
-  --grad: linear-gradient(135deg, #ff3b4f 0%, #e3182d 45%, #9e0c1c 100%);
-  --radius: 18px;
-  --radius-sm: 12px;
-  --shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-h: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --bg: #05060a;            /* deep space black */
+  --bg-2: #090b11;
+  --bg-3: #0c0f16;          /* gunmetal panels */
+  --card: rgba(138, 147, 166, 0.05);
+  --line: rgba(138, 147, 166, 0.14);
+  --line-2: rgba(138, 147, 166, 0.26);
+  --text: #e6eaf2;
+  --muted: #8a93a6;         /* steel grey */
+  --red: #ff1f3d;           /* neon red */
+  --red-2: #ff3352;
+  --red-deep: #a3001a;
+  --red-glow: rgba(255, 31, 61, 0.5);
+  --grad: linear-gradient(90deg, #ff1f3d 0%, #d10022 100%);
+  --radius: 4px;
+  --radius-sm: 3px;
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.85);
+  --font: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-h: "Chakra Petch", "Sora", system-ui, sans-serif;
+  --font-m: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --cut: 14px;
   --header-h: 78px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -820,3 +822,153 @@ main { position: relative; z-index: 1; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+
+/* =========================================================
+   TECH THEME LAYER — neon red on deep black, HUD details.
+   Cosmetic overrides only (colours, type, corners); layout lives above.
+   ========================================================= */
+body { font-weight: 300; letter-spacing: -0.005em; }
+strong, b { font-weight: 600; }
+h1, h2, h3, h4, .h1 { font-weight: 700; letter-spacing: -0.01em; }
+h1, .h1 { text-transform: uppercase; letter-spacing: 0; line-height: 1.04; font-size: clamp(2rem, 4.4vw, 3.5rem); }
+.page-hero h1 { font-size: clamp(2rem, 4.6vw, 3.6rem); }
+.lead { color: #c3cad8; font-weight: 300; }
+
+/* scanlines + vignette over everything (very subtle) */
+body::after { content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,.018) 0 1px, transparent 1px 3px); mix-blend-mode: overlay; }
+
+/* solid neon instead of gradient text */
+.text-red { background: none; -webkit-text-fill-color: currentColor; color: var(--red); text-shadow: 0 0 18px rgba(255,31,61,.45); }
+
+/* mono "code" labels */
+.eyebrow { font-family: var(--font-m); font-weight: 500; font-size: .74rem; letter-spacing: .16em; color: var(--red); }
+.eyebrow::before { content: "//"; width: auto; height: auto; background: none; border-radius: 0; color: var(--muted); letter-spacing: 0; }
+.eyebrow--light::before { color: rgba(255,255,255,.7); }
+.slide .eyebrow { border-radius: 2px; font-size: .7rem; letter-spacing: .14em; }
+.chip, .plan__badge, .billing__save, .sg__lvl, .tool, .areas span, .filter, .post-card__meta, .crumbs,
+.bar__label span:last-child, .dash__head small, .plan__bill, .case__nums small, .stat > span, .float-card small,
+.form label > span, .contact-list small, .tcard small, .logo__text small, .hero__trust small, .footer__bottom,
+.map-card__info small, .dash__kpis small, .dash__kpis em, .work__result, .plan__cur, .plan__per, .typed-line {
+  font-family: var(--font-m); letter-spacing: .02em; }
+.chip, .plan__badge, .filter, .tool { text-transform: uppercase; font-size: .7rem; letter-spacing: .08em; }
+.typed-line { font-size: 1rem; color: var(--muted); }
+.typed-line::before { content: "> "; color: var(--red); }
+
+/* ---- corners: chamfered / square instead of rounded pills ---- */
+.btn { border-radius: 0; font-family: var(--font-h); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .88rem;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
+.btn--red { background: var(--red); box-shadow: none; }
+.btn--red:hover { background: #ff3a55; box-shadow: none; }
+.btn--ghost { background: rgba(138,147,166,.06); border-color: var(--line-2); }
+.btn--ghost:hover { border-color: var(--red); background: rgba(255,31,61,.08); }
+.icon-btn { border-radius: 3px; }
+.chip, .filter, .billing, .billing__opt, .billing__pill, .billing__save, .areas span, .tool, .plan__badge,
+.slide .eyebrow, .about-chip, .sg__start { border-radius: 2px; }
+.chip { background: rgba(255,31,61,.1); color: #ff5a70; border-color: rgba(255,31,61,.35); }
+.ph, .ph--hero, .stat, .why, .industry, .faq, .post-card, .contact-list li, .form input, .form select, .form textarea,
+.svc, .pillar, .case, .glass, .plan, .tcard, .value, .ccard, .feature, .side-card, .tl__card, .map-card, .dash,
+.work, .work .ph, .mega__inner, .mega__promo, .acc, .acc__grid a, .tools, .cta-band, .about-badge, .float-card,
+.dash__kpis div, .dash__chart, .plans-custom, .author, .sheet__panel, .mega li a, .why > i, .contact-list i,
+.svc__icon, .pillar__icon, .plan__icon, .step__icon span, .float-card i, .mega__head i, .ccard i, .socials a,
+.share a, .tcard__avatar, .author__ph, .feature, .sg__card > i { border-radius: var(--radius); }
+.sheet__panel { border-radius: 6px 6px 0 0; }
+.photo-frame::before, .photo-frame::after, .about-media::before { border-radius: 4px; }
+
+/* chamfered panels (no children positioned outside these) */
+.pillar, .svc, .case, .stat, .tcard, .value, .ccard, .feature, .post-card, .why, .industry, .form, .dash, .cta-band, .plans-custom {
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
+
+/* solid gunmetal panels instead of frosted glass */
+.glass { background: linear-gradient(180deg, rgba(138,147,166,.07), rgba(138,147,166,.02)); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.pillar, .svc, .plan { background: linear-gradient(180deg, #0e1119, #08090e); }
+.plan--popular { background: linear-gradient(180deg, #160910, #08090e) padding-box, linear-gradient(180deg, #ff1f3d, #6d0013) border-box; }
+.post-card, .stat, .why, .industry { background: #0b0d14; }
+
+/* HUD corner brackets */
+.stat::after, .case::after, .tcard::after, .plan::after, .value::after, .feature::after, .dash::after, .sg__card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
+  background:
+    linear-gradient(var(--red), var(--red)) top left / 14px 2px no-repeat,
+    linear-gradient(var(--red), var(--red)) top left / 2px 14px no-repeat,
+    linear-gradient(var(--red), var(--red)) bottom right / 14px 2px no-repeat,
+    linear-gradient(var(--red), var(--red)) bottom right / 2px 14px no-repeat; }
+.sg__card { position: relative; }
+.sg__level.is-on .sg__card::after { opacity: 0; }
+.case, .tcard, .value, .feature, .dash { position: relative; }
+
+/* gradient fills → flat neon */
+.pillar__icon, .mega__head i, .float-card i, .ccard i, .author__ph, .step__icon span, .about-badge, .cta-band,
+.bottom-nav__fab, .plan--popular .plan__icon, .svc:hover .svc__icon, .filter.is-active, .billing__pill, .plan__badge,
+.acc summary > i:first-child { background: var(--red); }
+.cta-band { background: linear-gradient(120deg, #ff1f3d, #b8001d); box-shadow: none; }
+.stat::before, .case__bar span, .bar__track span, .dash__chart span { background: var(--red); }
+.bar__track, .case__bar { border-radius: 0; }
+.bar__track span, .case__bar span { border-radius: 0; box-shadow: 0 0 10px rgba(255,31,61,.8); }
+.bar__track { height: 6px; background: repeating-linear-gradient(90deg, rgba(138,147,166,.16) 0 10px, transparent 10px 12px); }
+.dash__chart span { border-radius: 1px; }
+.dash__chart span:nth-child(odd) { background: #2a3040; }
+.scroll-progress { background: var(--red); }
+
+/* numbers */
+.stat strong, .case__nums strong, .plan__price strong, .about-badge strong, .dash__kpis strong, .float-card strong { font-family: var(--font-h); letter-spacing: 0; }
+
+/* header / nav */
+.header.is-scrolled { background: rgba(5,6,10,.85); }
+.nav__list > li > a { font-family: var(--font-h); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; font-size: .86rem; border-radius: 2px; }
+.nav__list > li > a.is-active::after { width: 14px; height: 2px; border-radius: 0; bottom: 4px; }
+.logo__text strong { font-family: var(--font-h); font-size: 1.04rem; letter-spacing: .01em; }
+.logo__text small { font-size: .64rem; letter-spacing: .14em; }
+.mega__inner { background: rgba(8,9,14,.97); }
+.mega__head { font-family: var(--font-h); text-transform: uppercase; letter-spacing: .06em; font-size: .9rem; }
+.mega__promo { background: radial-gradient(circle at 85% 0%, rgba(255,31,61,.35), transparent 60%), #0b0d14; border-radius: var(--radius); }
+
+/* hero */
+.hero__glow { background: radial-gradient(circle, rgba(255,31,61,.22), transparent 60%); }
+.photo-frame::before { background: var(--red); opacity: .85; }
+.ph--hero { border-radius: 4px; }
+.float-card { background: rgba(8,9,14,.9); border-color: var(--line-2); border-left: 2px solid var(--red); }
+.dot { height: 3px; border-radius: 0; }
+.dot span { background: var(--red); }
+.avatars span { border-radius: 3px; }
+
+/* sections */
+.section--dark { background: var(--bg-2); }
+.grid-bg { background-image: linear-gradient(rgba(138,147,166,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(138,147,166,.06) 1px, transparent 1px); background-size: 48px 48px; }
+.marquee span { font-family: var(--font-h); text-transform: uppercase; letter-spacing: .06em; font-size: 1rem; color: #5d6577; }
+.pillar__num, .feature__n { -webkit-text-stroke: 1px rgba(255,31,61,.35); }
+.step__icon { border-radius: 4px; transform: none; }
+.step__icon span { border-radius: 2px; font-family: var(--font-m); }
+.step:hover .step__icon { background: var(--red); }
+.faq summary { font-family: var(--font-h); font-weight: 600; font-size: 1.05rem; }
+.faq summary i { border-radius: 2px; }
+.faq[open] { background: linear-gradient(180deg, rgba(255,31,61,.06), transparent); }
+.tcard__stars { color: var(--red); }
+.timeline::before { background: linear-gradient(var(--red), transparent); }
+.tl::before { border-radius: 0; transform: translateX(-50%) rotate(45deg); }
+.tl__year { font-family: var(--font-m); font-weight: 500; }
+.map-card iframe { filter: grayscale(1) invert(.94) contrast(.95) hue-rotate(180deg) brightness(.9); }
+.dash__head span { border-radius: 0; }
+
+/* forms */
+.form input, .form select, .form textarea { background: #07080d; border-color: var(--line-2); font-weight: 300; }
+.form input:focus, .form select:focus, .form textarea:focus { box-shadow: 0 0 0 3px rgba(255,31,61,.18); }
+
+/* pricing + SEO game */
+.plan--popular { box-shadow: 0 40px 80px -40px rgba(255,31,61,.55); }
+.plan__list i { border-radius: 2px; }
+.billing__save { background: rgba(255,31,61,.14); color: #ff6a7d; }
+.plan__bill b { color: #ff6a7d; }
+.sg__card { border-radius: 0; }
+.sg__level.is-on .sg__card { background: linear-gradient(135deg, #ff1f3d, #a3001a); border-color: #ff4d63; }
+
+/* footer / mobile */
+.footer { background: #030407; }
+.footer h4 { font-family: var(--font-h); text-transform: uppercase; letter-spacing: .1em; font-size: .86rem; }
+.footer h4::after { background: var(--red); }
+.bottom-nav { background: rgba(5,6,10,.94); }
+.bottom-nav__item { font-family: var(--font-h); text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; }
+.bottom-nav__item.is-active::before { background: var(--red); border-radius: 0; }
+.preloader__bar { border-radius: 0; }
+.preloader__bar::after { background: var(--red); }

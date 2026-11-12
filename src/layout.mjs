@@ -37,7 +37,7 @@ export function head({ title, description, path, b, schema = [] }) {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<meta name="theme-color" content="#0a0a0c">
+<meta name="theme-color" content="#05060a">
 <link rel="canonical" href="${canonical}">
 <meta name="geo.region" content="PK-SD">
 <meta name="geo.placename" content="Karachi">
@@ -50,7 +50,7 @@ export function head({ title, description, path, b, schema = [] }) {
 <link rel="icon" href="${b}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${b}assets/vendor/remixicon/remixicon.css">
 <link rel="stylesheet" href="${b}assets/css/style.css">
 ${ld}
